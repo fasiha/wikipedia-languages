@@ -1,0 +1,16 @@
+<meta charset="UTF-8">
+<script src="../dist/bundle.min.js"></script>
+<script>
+  (async () => {
+    const actualUrl = 'https://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv';
+    const wikidata = await wikilangs('https://cors-anywhere.herokuapp.com/' + actualUrl);
+    var div = document.createElement("div");
+    for (const obj of wikidata) {
+      var p = document.createElement("p");
+      var content = document.createTextNode(Object.values(obj).join(', '));
+      p.appendChild(content);
+      div.appendChild(p);
+    }
+    document.body.appendChild(div);
+  })();
+</script>

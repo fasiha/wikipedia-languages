@@ -4,6 +4,7 @@
   "description": "All the languages, and basic statistics, of Wikipedia",
   "main": "index.js",
   "scripts": {
+    "bundle": "$(npm bin)/browserify -s wikilangs index.js -o dist/bundle.js && $(npm bin)/google-closure-compiler-js dist/bundle.js > dist/bundle.min.js",
     "test": "tape tests/test.js"
   },
   "keywords": [],
@@ -13,7 +14,9 @@
     "cross-fetch": "^2.0.0"
   },
   "devDependencies": {
+    "browserify": "^16.1.0",
     "get-random-port": "0.0.1",
+    "google-closure-compiler-js": "^20180204.0.0",
     "tape": "^4.9.0"
   }
 }

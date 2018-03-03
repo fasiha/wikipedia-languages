@@ -48,13 +48,5 @@ async function parse(source, keys, sep) {
   return subset;
 }
 
-if (require.main === module) {
-  (async function main() {
-    console.log(JSON.stringify(
-        await parse(
-            null, 'lang;prefix;total;good;views;edits;users;admins;loclang;loclanglink;activeusers;ratio'.split(';')),
-        null, 1));
-  })();
-}
-
-module.exports = parse;
+module.exports
+    = parse;
