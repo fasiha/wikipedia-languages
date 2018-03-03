@@ -1,15 +1,19 @@
 {
   "name": "wikipedia-languages",
   "version": "1.0.0",
-  "description": "",
+  "description": "All the languages, and basic statistics, of Wikipedia",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tape tests/test.js"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "Ahmed Fasih",
+  "license": "Unlicense",
   "dependencies": {
     "cross-fetch": "^2.0.0"
+  },
+  "devDependencies": {
+    "get-random-port": "0.0.1",
+    "tape": "^4.9.0"
   }
 }
