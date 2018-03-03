@@ -8,6 +8,11 @@ const wiki = require('../index');                 // The module under test
 const index = fs.readFileSync(__dirname + '/wikipedias-2018-03-02.csv', 'utf8');
 
 test('Loading and parsing cached Wikimedia Foundation CSV data', async (t) => {
+  try {
+    await wiki('http://localhost:1');
+    throw new Error('_-^-_')
+  } catch (e) { t.ok(/ECONNREFUSED/.test(e.toString()), 'Fetch error when no server running'); }
+
   const port = await getRandomPort();
   // Create an HTTP server that'll just dump the CSV data for each request
   let server = http.createServer((req, res) => {
