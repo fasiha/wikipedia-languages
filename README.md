@@ -2,6 +2,8 @@
 
 Get all the languages Wikipedia is in, from the source, at Wikistats: [https://wikistats.wmflabs.org/](https://wikistats.wmflabs.org/).
 
+***Important caveat*** This is an unofficial npm repository and software package, unsanctioned by the Wikimedia Foundation. Furthermore, the Wikistats service might change at any time, rendering this package unusable. Please open an issue or get in touch if/when this happens.
+
 ## Install
 
 **Node.js** In your Node.js project, run
