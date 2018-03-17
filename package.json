@@ -1,6 +1,6 @@
 {
   "name": "wikipedia-languages",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "All the languages, and basic statistics, of Wikipedia",
   "main": "index.js",
   "scripts": {

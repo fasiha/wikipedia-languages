@@ -3,6 +3,7 @@ const fetch = require('cross-fetch');
 const DEFAULT_SOURCE = 'https://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv';
 const DEFAULT_KEYS = 'lang;prefix;total;good;views;edits;users;admins;loclang;loclanglink;activeusers;ratio'.split(';');
 const DEFAULT_SEPARATOR = ',';
+const DEFAULT_USERAGENT = "See https://github.com/fasiha/wikipedia-languages/";
 
 // Converts 'Fran&#231;ais! Fran&#231;ais!' to 'Français! Français!'. See
 // https://www.w3.org/International/questions/qa-escapes
@@ -14,14 +15,15 @@ function gentlyParseNumber(text) { return parseFloat(text) || text; }
 
 // Download a Wikimedia Foundation CSV from the web, gently parse it, and dump the columns of interest as JavaScript
 // objects.
-async function parse(source, keys, sep) {
+async function parse(source, keys, sep, userAgent) {
   // Fix arguments
   source = source || DEFAULT_SOURCE;
   keys = (keys && keys.length) ? keys : DEFAULT_KEYS;
   sep = sep || DEFAULT_SEPARATOR;
+  userAgent = userAgent || DEFAULT_USERAGENT;
 
   // HTTP request and error checking
-  const res = await fetch(source);
+  const res = await fetch(source, { headers : { "User-Agent" : userAgent } });
   if (res.status >= 400) { throw new Error('Status ' + res.status + ' received from ' + source); }
 
   // Make sure we got at least one line of header and one line of data
@@ -48,5 +50,4 @@ async function parse(source, keys, sep) {
   return subset;
 }
 
-module.exports
-    = parse;
+module.exports = parse;

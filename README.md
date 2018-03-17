@@ -33,12 +33,13 @@ wikilangs('https://cors-anywhere.herokuapp.com/' + 'https://wikistats.wmflabs.or
 
 Once the `wikilangs` variable is available, either in Node or in the browser, invoke it as a function that returns a Promise. It's call signature is:
 
-**`wikilangs(source=DEFAULT_SOURCE, keys=DEFAULT_KEYS, sep=",") // => [Object]`**
+**`wikilangs(source=DEFAULT_SOURCE, keys=DEFAULT_KEYS, sep=",", userAgent="See [repo url]") // => [Object]`**
 
 That is,
 - `source` is the URL to load; by default, the Wikipedias CSV file hosted on https://wikistats.wmflabs.org/;
 - `keys` is an array of strings corresponding to the columns in that CSV file; by default, this module will look for and return the following columnar keys:  `lang`, `prefix`, `total`, `good`, `views`, `edits`, `users`, `admins`, `loclang`, `loclanglink`, `activeusers`, `ratio` (meaning, stub to article ratio). Currently, these and the following keys are available: `id`, `ts`,  `images`, `version`, `si_mainpage`, `si_base`, `si_sitename`, `si_generator`, `si_phpversion`, `si_phpsapi`, `si_dbtype`, `si_dbversion`, `si_rev`, `si_case`, `si_rights`, `si_lang`, `si_fallback8bitEncoding`, `si_writeapi`, `si_timezone`, `si_timeoffset`, `si_articlepath`, `si_scriptpath`, `si_script`, `si_variantarticlepath`, `si_server`, `si_wikiid`, `si_time`, `method`, `http`, `status`.
 - `sep` is the separator, by default the comma, since we're loading a CSV (comma-separated value) file.
+- `userAgent` is a string to identify your request to the Wikimedia Foundation Labs server as. If you plan on deploying this in a way that might place a burden on the WMF server, pass in a custom string here telling them how to get in touch with you (email or contact URL; otherwise they might just block your IP address and send a banshee to torment you). By default it points to this GitHub repo.
 
 The returned Promise will wrap an array of objects whose keys were specified in `keys`. The values are lightly massaged, e.g., strings are converted to numbers, HTML escape sequences like `"Fran&#231;ais"` and `"&#26085;&#26412;&#35486;"` are unescaped to "Français" and "日本語".
 
@@ -81,3 +82,9 @@ Bundle and transpile for old browsers with `$ npm bundle`. (This calls Browserif
 ## License
 
 See `UNLICENSE`.
+
+## Changelog
+
+**1.1.0** Add `userAgent` argument to the module.
+
+**1.0.0** Initial.

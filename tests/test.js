@@ -7,6 +7,8 @@ const wiki = require('../index');                 // The module under test
 // Slurp the file from disk. `__dirname` because the CSV will be in the same directory as this test.
 const index = fs.readFileSync(__dirname + '/wikipedias-2018-03-02.csv', 'utf8');
 
+const agent = 'tapetest123123';
+
 test('Loading and parsing cached Wikimedia Foundation CSV data', async (t) => {
   try {
     await wiki('http://localhost:1');
@@ -16,6 +18,7 @@ test('Loading and parsing cached Wikimedia Foundation CSV data', async (t) => {
   const port = await getRandomPort();
   // Create an HTTP server that'll just dump the CSV data for each request
   let server = http.createServer((req, res) => {
+    t.equal(req.headers['user-agent'], agent, 'custom user agent found');
     res.writeHead(200, { 'Content-Type' : 'text/plain' });
     res.end(index);
   });
@@ -23,10 +26,10 @@ test('Loading and parsing cached Wikimedia Foundation CSV data', async (t) => {
   // Once the HTTP server is up and running, then begin our tests
   server.listen(port, async () => {
     // Invoke the module under test
-    let data = await wiki(`http://localhost:${port}`, 'lang;prefix;edits;loclang'.split(';'));
+    let data = await wiki(`http://localhost:${port}`, 'lang;prefix;edits;loclang'.split(';'), '', agent);
 
     t.ok(data.every(o => o.hasOwnProperty('lang') && o.hasOwnProperty('prefix') && o.hasOwnProperty('edits')
-                 && o.hasOwnProperty('loclang')),
+                         && o.hasOwnProperty('loclang')),
         'Each row has the fields we want');
 
     t.ok(data.every(o => typeof o.prefix === 'string'), 'Each row has stringy `prefix`');
@@ -37,5 +40,4 @@ test('Loading and parsing cached Wikimedia Foundation CSV data', async (t) => {
     server.close();
     t.end();
   });
-
-})
+});
