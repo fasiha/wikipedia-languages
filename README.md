@@ -85,6 +85,8 @@ See `UNLICENSE`.
 
 ## Changelog
 
+**1.1.1** Documentation changes.
+
 **1.1.0** Add `userAgent` argument to the module.
 
 **1.0.0** Initial.
