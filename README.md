@@ -19,14 +19,14 @@ var wikilangs = require('wikipedia-languages');
 wikilangs().then(res => console.log(res));
 ```
 
-**Browser** This module works in the browser (although it might need some CORS workarounds, see below). Download the [`dist/bundle.min.js`](dist/bundle.min.js) to your app and load it by putting the following in your HTML:
+**Browser** Download the [`dist/bundle.min.js`](dist/bundle.min.js) and load it by putting the following in your HTML:
 ```html
 <script type="text/javascript" src="bundle.min.js"></script>
 ```
 
-This will load the library's function into the global namespace as `wikilangs` (the only place that name appears in this repository is in the [`package.json`](package.json), the package name that `browserify` uses), so you can pop open your JavaScript Console and run the following—it's slightly adapted from the above because the Wikimedia Foundation webserver doesn't yet support CORS:
+This will load the library's function into the global namespace as `wikilangs` (JavaScript nerd note: the only place that name appears in this repository is in the [`package.json`](package.json), the package name that `browserify` uses), so you can pop open your JavaScript Console and run this (same as for Node, above):
 ```js
-wikilangs('https://cors-anywhere.herokuapp.com/' + 'https://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv').then(res => console.log(res));
+wikilangs().then(res => console.log(res));
 ```
 
 ## API/usage

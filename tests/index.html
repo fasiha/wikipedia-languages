@@ -2,8 +2,7 @@
 <script src="../dist/bundle.min.js"></script>
 <script>
   (async () => {
-    const actualUrl = 'https://wikistats.wmflabs.org/api.php?action=dump&table=wikipedias&format=csv';
-    const wikidata = await wikilangs('https://cors-anywhere.herokuapp.com/' + actualUrl);
+    const wikidata = await wikilangs();
     var div = document.createElement("div");
     for (const obj of wikidata) {
       var p = document.createElement("p");
